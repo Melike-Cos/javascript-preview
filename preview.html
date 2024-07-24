@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+    <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="preview.css">
+
+    <title>Form</title>
+</head>
+<body>
+
+
+    <div class="container right-panel-active">
+        <div class="container__form container--signup">
+
+            <form method="post" action="upload.php" class="form" id="form1" enctype="multipart/form-data">
+                <div id="profilContainer">
+                    <div id="preview">
+
+                    </div>
+                    <input type="file" name="picture" id="images">
+
+                    <hr>
+                </div>
+
+                <div>
+                    <input type="text" id="name" name="name" placeholder="Name" required>
+                </div>
+                <div>
+                    <input type="text" id="surname" name="surname" placeholder="surname" required>
+                </div>
+
+                <fieldset>
+
+                    <div class="d-flex flex-row mb-3">
+                        <legend class="p-2"> Gender</legend>
+                        <div class="p-2">
+                            <input type="radio" name="gender" value="woman" checked>
+                            <label>Woman</label>
+                        </div>
+
+                        <div class="p-2">
+                            <input type="radio" name="gender" value="man">
+                            <label>Man</label>
+                        </div>
+                    </div>
+                </fieldset>
+                <button type="submit" name="Submit" class="btn">Load</button>
+            </form>
+        </div>
+
+
+        <div class="container__overlay">
+            <div class="overlay">
+            </div>
+        </div>
+
+
+    </div>
+
+<script>
+        //foto preview
+        const images = document.getElementById('images'),
+            preview = document.getElementById('preview');
+
+        images.addEventListener('change', function() {
+            //  Works when image is selected
+            preview.innerHTML = '';
+            [...this.files].map(file => {
+                //transactions are made here
+                const reader = new FileReader();
+                reader.addEventListener('load', function() {
+                    // This will run once the file is read successfully
+                    //file view
+                    const image = new Image();
+                    image.height = 150;
+                    image.title = file.name;
+                    image.src = this.result;
+                    image.style.borderRadius = '10%';
+                    preview.appendChild(image);
+                });
+                reader.readAsDataURL(file);
+            })
+        })
+
+        // Function triggered when form is submitted
+        function submitForm(event) {
+            event.preventDefault(); // Prevent form from being automatically submitted
+
+            // collect information
+            var name = document.getElementById("name").value;
+            var surname = document.getElementById("surname").value;
+            var picture = document.getElementById("picture").value;
+            var gender = document.getElementById("gender").value;
+
+            // check it
+            if (name === "" || SURNAME === "" || picture === "" || gender === "") {
+                alert("Please fill in all fields.");
+                alert("The form has been sent successfully!");
+                document.getElementById("Form").reset(); //Reset form
+            }
+        }
+
+        // Listen for form submit event
+        document.getElementById("Form").addEventListener("submit", submitForm);
+    </script>
+
+
+    
+</body>
+</html>
